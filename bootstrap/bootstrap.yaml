@@ -1,0 +1,17 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+    name: bootstrap
+    namespace: flux-system
+spec:
+    #dependsOn:
+    #    - name: k8s-external-secrets
+    interval: 1h
+    path: ./manifests/
+    prune: true
+    retryInterval: 10m
+    sourceRef:
+        kind: GitRepository
+        name: gitops-fleet
+        namespace: flux-system
+    suspend: false
